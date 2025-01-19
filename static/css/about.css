@@ -1,0 +1,336 @@
+:root{
+    --primary-dark-blue-color: #00385F;
+    --secondary-dark-blue-color: #00192A;
+    --primary-white-color: #FFF;
+    --primary-light-blue-color: #0083dd;
+    --primary-black-color: #000000;
+    --paragraph-text-color: #7D7D7D;
+    --footer-color: #00192A;
+    --gray-text-color: #F7F7F7;
+    --dark-blur-effect-color: #D7DBDB;
+    --opacity-light-blue-color: rgba(0, 131, 221, 0.2);
+
+    --font-size-xxl: 2.5rem;
+    --font-size-xl: 2rem;
+    --font-size-lg: 1.5rem;
+    --font-size-md: 1.2rem;
+    --font-size-sm: 1rem;
+    --font-size-xs: 0.8rem;
+
+    --font-weight-bold: 700;
+    --font-weight-semi-bold: 600;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+    --font-weight-sticky: 300;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navbar */
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: clamp(1.5rem,7.36vw,6.625rem);
+    padding-right: clamp(1.5rem,7.36vw,6.625rem);
+    background-color: var(--primary-white-color);
+    height: 80px;
+    box-shadow: 2px 0px 4px var(--dark-blur-effect-color);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-bottom: 20px;
+}
+/* Logo */
+nav h1{
+    color: var(--primary-light-blue-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semi-bold);
+}
+nav h1 a{
+    text-decoration: none;
+    color: var(--primary-light-blue-color);
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+}
+nav h1 a:hover{
+    transform: scale(1.1);
+}
+/* Links */
+nav ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1.25rem,3.47vw,3.75rem);
+}
+nav ul a{
+    text-decoration: none;
+    color: var(--paragraph-text-color);
+    transition: all 0.1s ease;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+}
+nav ul a:hover,
+nav ul a.active{
+    color: var(--primary-dark-blue-color);
+}
+nav > a.login{
+    display: inline-flex;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+nav > a.login:hover{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+nav > a.connected{
+    display: inline-flex;
+    padding: 5px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+nav > a.connected:hover,
+nav > a.connected:focus{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+
+/* Banner */
+.banner{
+    width: 97.36%;
+    height: 500px;
+    border-radius: 20px;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    background-image: url(../images/bannerimage.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.banner .text-banner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: clamp(3.125rem,6.74vw,6.25rem);
+    gap: 30px;
+    background: linear-gradient(69deg, var(--primary-light-blue-color), rgba(85, 26, 139, 0));
+}
+.banner .text-banner h1{
+    display: inline-block;
+    width: clamp(25rem,42.71vw,40.625rem);
+    font-size: var(--font-size-xxl);
+    color: var(--primary-white-color);
+    font-weight: var(--font-weight-medium);
+}
+.banner .text-banner p{
+    display: inline-block;
+    width: clamp(25rem,34.72vw,31.25rem);
+    color: var(--gray-text-color);
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-sm);
+}
+.banner .text-banner a{
+    display: inline-flex;
+    height: 40px;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: 2px solid var(--primary-white-color);
+    color: var(--primary-white-color);
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+.banner .text-banner a:hover{
+    background-color: var(--primary-white-color);
+    color: var(--primary-light-blue-color);
+}
+
+/* Services */
+.services{
+    width: 100%;
+    height: auto;
+    padding-top: 80px;
+    padding-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+}
+/* Tag and Title */
+.services .tag-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.services .tag-title .tag{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 40px;
+    border-radius: 30px;
+    background-color: var(--opacity-light-blue-color);
+    color: var(--primary-light-blue-color);
+}
+.services .tag-title h1{
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--primary-dark-blue-color);
+}
+/* Container service */
+.services .contain-services{
+    width: auto;
+    display: flex;
+    gap: 37px;
+    flex-wrap: wrap;
+}
+.services .contain-services .service{
+    width: clamp(12.5rem,27.78vw,25rem);
+    height: 300px;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 0 20px var(--dark-blur-effect-color);
+    border-bottom: 3px solid var(--primary-light-blue-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2rem;
+}
+.services .contain-services .service h2{
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--primary-dark-blue-color);
+}
+.services .contain-services .service p{
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--paragraph-text-color);
+}
+
+/* Information */
+.informations{
+    width: clamp(21.875rem,88.19vw,81.25rem);
+    height: auto;
+    display: flex;
+    padding-bottom: 200px;
+}
+.informations .images{
+    flex: 4;
+    height: 600px;
+    position: relative;
+}
+.informations .images .img1{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+}
+.informations .images .img2{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 10px;
+    border: 10px solid var(--primary-white-color);
+}
+.informations .description{
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.informations .description h2{
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--primary-dark-blue-color);
+}
+.informations .description p{
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    color: var(--paragraph-text-color);
+}
+.informations .description a{
+    width: 200px;
+    height: 40px;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease-in-out;
+}
+.informations .description a:hover{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+
+/* Footer */
+footer{
+    width: 100%;
+    height: 400px;
+    background-color: var(--secondary-dark-blue-color);
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+footer h1{
+    color: var(--primary-white-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 50px;
+}
+footer ul{
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin-bottom: 100px;
+}
+footer ul li a{
+    text-decoration: none;
+    color: var(--gray-text-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+}
+footer ul li a:hover{
+    color: var(--primary-white-color);
+}
+footer .sized{
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-white-color);
+    margin-bottom: 20px;
+}
+footer p{
+    color: var(--primary-white-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}

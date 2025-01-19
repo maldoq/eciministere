@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECI - Ministere | Espace connexion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">  <!-- Use static tag for CSS -->
+</head>
+<body>
+    <div class="eci">
+        <h1>ECI</h1>
+    </div>
+    <div class="form">
+        <div class="title">
+            <h2>Se connecter</h2>
+            <a href="{% url 'register_people' %}">S'inscrire</a>  <!-- Link to registration page -->
+        </div>
+        <form action="{% url 'login' %}" method="POST">  <!-- Use POST method for login -->
+            {% csrf_token %}  <!-- Include CSRF token for security -->
+            <input type="email" name="email" id="email" placeholder="Email ou numéro de téléphone" required>
+            <input type="password" name="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit">VALIDER</button>
+            <div class="separate">
+                <div class="sized"></div>
+                <p>or</p>
+                <div class="sized"></div>
+            </div>
+            <div class="inputs">
+                <a href="">
+                    <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_13_298)">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M18.75 9.09375H14.0625V5.96875C14.0625 5.55435 14.2271 5.15692 14.5201 4.8639C14.8132 4.57087 15.2106 4.40625 15.625 4.40625H17.1875V0.5H14.0625C12.8193 0.5 11.627 0.99386 10.7479 1.87294C9.86886 2.75201 9.375 3.9443 9.375 5.1875V9.09375H6.25V13H9.375V25.5H14.0625V13H17.1875L18.75 9.09375Z" fill="#1976D2"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_13_298">
+                        <rect width="25" height="25" fill="white" transform="translate(0 0.5)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                    <p>Facebook</p>
+                </a>
+                <a href="">
+                    <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_13_313)">
+                        <path d="M24.7024 13.2339C24.7024 12.2096 24.6193 11.4622 24.4395 10.6871H12.7437V15.31H19.6088C19.4705 16.4589 18.723 18.189 17.0621 19.3516L17.0388 19.5064L20.7368 22.3712L20.993 22.3968C23.3459 20.2237 24.7024 17.0263 24.7024 13.2339Z" fill="#4285F4"/>
+                        <path d="M12.7436 25.4141C16.1069 25.4141 18.9305 24.3068 20.9929 22.3968L17.062 19.3516C16.0101  20.0852 14.5982 20.5973 12.7436 20.5973C9.44939 20.5973 6.6535 18.4243 5.65684 15.4208L5.51075 15.4332L1.66552 18.4091L1.61523 18.5489C3.66371 22.6181 7.87144 25.4141 12.7436 25.4141Z" fill="#34A853"/>
+                        <path d="M5.65695 15.4208C5.39397 14.6457 5.24177 13.8152 5.24177 12.9571C5.24177 12.0989 5.39397 11.2684 5.64311 10.4933L5.63614 10.3282L1.74273 7.30458L1.61534 7.36517C0.771068 9.05382 0.286621 10.9501 0.286621 12.9571C0.286621 14.964 0.771068 16.8602 1.61534 18.5489L5.65695 15.4208Z" fill="#FBBC05"/>
+                        <path d="M12.7436 5.3167C15.0827 5.3167 16.6606 6.3271 17.5603 7.17147L21.0759 3.73884C18.9168 1.73187 16.1069 0.5 12.7436 0.5C7.87144 0.5 3.66371 3.2959 1.61523 7.36517L5.643 10.4933C6.6535 7.48979 9.44939 5.3167 12.7436 5.3167Z" fill="#EB4335"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_13_313">
+                        <rect width="24.43" height="25" fill="white" transform="translate(0.285156 0.5)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+                    <p>Google</p>
+                </a>
+            </div>
+        </form>
+        <div class="return">
+            <a href="{% url 'home' %}">Retour</a>  <!-- Link to return home -->
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,279 @@
+:root{
+    --primary-dark-blue-color: #00385F;
+    --secondary-dark-blue-color: #00192A;
+    --primary-white-color: #FFF;
+    --primary-light-blue-color: #0083dd;
+    --primary-black-color: #000000;
+    --paragraph-text-color: #7D7D7D;
+    --footer-color: #00192A;
+    --gray-text-color: #F7F7F7;
+    --dark-blur-effect-color: #D7DBDB;
+    --opacity-light-blue-color: rgba(0, 131, 221, 0.25);
+
+    --font-size-xxl: 2.5rem;
+    --font-size-xl: 2rem;
+    --font-size-lg: 1.5rem;
+    --font-size-md: 1.2rem;
+    --font-size-sm: 1rem;
+    --font-size-xs: 0.8rem;
+
+    --font-weight-bold: 700;
+    --font-weight-semi-bold: 600;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+    --font-weight-sticky: 300;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Navbar */
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: clamp(1.5rem,7.36vw,6.625rem);
+    padding-right: clamp(1.5rem,7.36vw,6.625rem);
+    background-color: var(--primary-white-color);
+    height: 80px;
+    box-shadow: 2px 0px 4px var(--dark-blur-effect-color);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+/* Logo */
+nav h1{
+    color: var(--primary-light-blue-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semi-bold);
+}
+nav h1 a{
+    text-decoration: none;
+    color: var(--primary-light-blue-color);
+    transform-origin: center;
+    transition: transform 0.2s ease-in-out;
+}
+nav h1 a:hover{
+    transform: scale(1.1);
+}
+/* Links */
+nav ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1.25rem,3.47vw,3.75rem);
+}
+nav ul a{
+    text-decoration: none;
+    color: var(--paragraph-text-color);
+    transition: all 0.1s ease;
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-sm);
+}
+nav ul a:hover,
+nav ul a.active{
+    color: var(--primary-dark-blue-color);
+}
+nav > a.login{
+    display: inline-flex;
+    padding: 10px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+nav > a.login:hover{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+nav > a.connected{
+    display: inline-flex;
+    padding: 5px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    text-decoration: none;
+    transition: all 0.1s ease;
+}
+nav > a.connected:hover,
+nav > a.connected:focus{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+
+/* Demande Liste */
+.demandelist{
+    width: 100%;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    align-items: flex-end;
+}
+/* Button add */
+.demandelist > a{
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 5px;
+    border: 2px solid var(--primary-light-blue-color);
+    color: var(--primary-light-blue-color);
+    font-size: var(--font-size-sm);
+    transition: all 0.1s ease;
+}
+.demandelist > a:hover{
+    background-color: var(--primary-light-blue-color);
+    color: var(--primary-white-color);
+}
+.demandelist .table{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+/* Header table */
+.demandelist .table .thead{
+    width: 100%;
+    height: 70px;
+    border-radius: 2px;
+    border-bottom: 1px solid var(--primary-light-blue-color);
+    box-shadow: 0 0 10px var(--dark-blur-effect-color);
+    display: flex;
+    padding: 0 29px;
+    align-items: center;
+    justify-content: space-between;
+}
+.demandelist .table .thead ul{
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+.demandelist .table .thead ul li{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(6.25rem,10.5vw,12.5rem);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--paragraph-text-color);
+}
+.demandelist .table .thead p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(6.25rem,13.89vw,18.75rem);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--paragraph-text-color);
+}
+/* Body table */
+.demandelist .table .tbody{
+    width: 100%;
+    height: 465px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.demandelist .table .tbody .row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 85px;
+    border-radius: 10px;
+    padding: 0 29px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 2px 4px 4px var(--dark-blur-effect-color);
+    transition: all 0.3s ease-in-out;
+}
+.demandelist .table .tbody .row:hover{
+    background-color: var(--gray-text-color);
+}
+.demandelist .table .tbody .row ul{
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+.demandelist .table .tbody .row ul li{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: clamp(6.25rem,10.5vw,12.5rem);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--paragraph-text-color);
+}
+.demandelist .table .tbody .row .actions{
+    display: flex;
+    height: 100%;
+}
+.demandelist .table .tbody .row .actions a{
+    text-decoration: none;
+    display: inline-flex;
+    width: 68px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    border-left: 1px solid var(--primary-light-blue-color);
+}
+
+/* Footer */
+footer{
+    width: 100%;
+    height: 400px;
+    background-color: var(--secondary-dark-blue-color);
+    padding: 0 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+footer h1{
+    color: var(--primary-white-color);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 50px;
+}
+footer ul{
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin-bottom: 100px;
+}
+footer ul li a{
+    text-decoration: none;
+    color: var(--gray-text-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+}
+footer ul li a:hover{
+    color: var(--primary-white-color);
+}
+footer .sized{
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-white-color);
+    margin-bottom: 20px;
+}
+footer p{
+    color: var(--primary-white-color);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+}

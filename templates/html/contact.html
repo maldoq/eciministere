@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECI - Ministere | Contact</title>
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">  <!-- Use static tag for CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1><a href="{% url 'home' %}">ECI</a></h1>
+        <ul>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a href="{% url 'about' %}">A propos</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'demandelist' %}">Mes demandes</a></li>
+                <li><a class="active" href="{% url 'contact' %}">Contact</a></li>
+            {% else %}
+                <li><a class="active" href="{% url 'contact' %}">Contact</a></li>
+            {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+            <a href="" class="connected">{{ user.email }}</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="login">Se connecter</a>
+        {% endif %}
+    </nav>
+
+    <!-- Container contact -->
+    <div class="container">
+        <div class="back">
+            <h1>CONTACTEZ-NOUS</h1>
+        </div>
+        <div class="contact">
+            <div class="info-service">
+                <h3>Information sur le service client</h3>
+                <p>Trouvez ici toutes les infos nécessaires pour nous contacter</p>
+                <div class="infos">
+                    <div class="info">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.9998 13.8844L26.9811 6.1875C26.4994 5.8262 25.9144 5.62903 25.3123 5.625H4.6873C4.08518 5.62903 3.50025 5.8262 3.01855 6.1875L14.9998 13.8844Z" fill="white"/>
+                            <path d="M15.5063 15.7875L15.3469 15.8625H15.2719C15.1856 15.9011 15.0939 15.9264 15 15.9375C14.9222 15.9473 14.8434 15.9473 14.7656 15.9375H14.6906L14.5312 15.8625L1.96875 7.74375C1.90873 7.97019 1.87724 8.20325 1.875 8.4375V21.5625C1.875 22.3084 2.17132 23.0238 2.69876 23.5512C3.22621 24.0787 3.94158 24.375 4.6875 24.375H25.3125C26.0584 24.375 26.7738 24.0787 27.3012 23.5512C27.8287 23.0238 28.125 22.3084 28.125 21.5625V8.4375C28.1228 8.20325 28.0913 7.97019 28.0312 7.74375L15.5063 15.7875Z" fill="white"/>
+                        </svg>
+                        <p>dominiquemalik20@gmail.com</p>
+                    </div>
+                    <div class="info">
+                        <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.3903 8.064C12.0321 3.67 7.73463 1.514 7.55276 1.426C7.38274 1.34075 7.1922 1.31351 7.00713 1.348C2.04588 2.226 1.29963 5.306 1.26963 5.434C1.22882 5.61237 1.23531 5.79934 1.28838 5.974C7.20588 25.558 19.504 29.188 23.5465 30.382C23.8578 30.474 24.1146 30.548 24.3096 30.616C24.5322 30.6936 24.7739 30.6786 24.9865 30.574C25.1103 30.514 28.0315 29.046 28.7459 24.258C28.7776 24.049 28.746 23.8346 28.6559 23.646C28.5921 23.514 27.064 20.412 22.8265 19.316C22.6828 19.2768 22.5322 19.2754 22.3879 19.312C22.2435 19.3486 22.1096 19.422 21.9978 19.526C20.6609 20.744 18.814 22.042 18.0171 22.176C12.6753 19.39 9.69213 14.044 9.57963 13.03C9.51401 12.46 10.7384 10.458 12.1465 8.83C12.235 8.72754 12.3024 8.60645 12.3444 8.47452C12.3864 8.3426 12.402 8.20276 12.3903 8.064Z" fill="white"/>
+                        </svg>
+                        <p>+225 0704044013</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form">
+                <form action="{% url 'contact' %}" method="POST">  <!-- Use POST method for contact form -->
+                    {% csrf_token %}  <!-- Include CSRF token for security -->
+                    <div class="inputs">
+                        <div class="label-text">
+                            <label for="fullname">Nom et prénoms</label>
+                            <input type="text" name="fullname" id="fullname" required>
+                        </div>
+                        <div class="label-text">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="label-text">
+                        <label for="subject">Sujet</label>
+                        <input type="text" name="subject" id="subject" required>
+                    </div>
+                    <div class="label-text">
+                        <label for="messages">Messages</label>
+                        <textarea name="messages" id="messages" required></textarea>
+                    </div>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h1>ECI</h1>
+        <ul>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a href="{% url 'about' %}">A propos</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <div class="sized"></div>
+        <p>2025 Copyright - all rights reserved</p>
+    </footer>
+</body>
+</html>
