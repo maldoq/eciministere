@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECI - Ministere | {% if action == 'analyse' %}Analyse de dossier{% elif action == 'confirm' %}Confirmation de dossier{% endif %}</title>
+    <link rel="stylesheet" href="{% static 'css/treatmentlist.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1>ECI</h1>
+        <div class="links">
+            <ul>
+                {% if action == 'analyse' %}
+                <li><a href="{% url "dashboard" %}">Dashboard</a></li>
+                <li><a class="active" href="{% url "analyse_list" %}">Analyse</a></li>
+                <li><a href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a href="">Paramètre</a></li>
+                {% elif action == 'confirm' %}
+                <li><a href="{% url "dashboard" %}">Dashboard</a></li>
+                <li><a href="{% url "analyse_list" %}">Analyse</a></li>
+                <li><a class="active" href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a href="">Paramètre</a></li>
+                {% endif %}
+            </ul>
+            <ul>
+                <li><a href="">{{user.username}}</a></li>
+                <li><a href="{% url "logout" %}" class="logout">Se déconnecter</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Table -->
+    <div class="demandelist">
+        <h1>{% if action == 'analyse' %}Analyse{% elif action == 'confirm' %}Confirmation{% endif %}</h1>
+        <div class="table">
+            <div class="thead">
+                <ul>
+                    <li>Numero de demande</li>
+                    <li>Acte</li>
+                    <li>Etat</li>
+                    <li>Date d'envoie</li>
+                    <li>Utilisateur</li>
+                </ul>
+            </div>
+            <div class="tbody">
+                {% if action == 'analyse' %}
+                {% for demande in demande_list %}
+                <a href="{% url "analyse_detail" demande.idDem %}" class="row">
+                    <ul>
+                        <li id="id">{{ demande.idDem }}</li>
+                        <li id="acte">{{ demande.acte.libelleActe }}</li>
+                        <li id="state">{{ demande.stateDem }}</li>
+                        <li id="dateEnv">{{ demande.dateEnvDem|date:"d-m-Y" }}</li>
+                        <li id="suivi">{{ demande.user.lastname }}</li>
+                    </ul>
+                </a>
+                {% endfor %}
+                {% elif action == 'confirm' %}
+                {% for demande in demande_list %}
+                <a href="{% url "confirmation_detail" demande.idDem %}" class="row">
+                    <ul>
+                        <li id="id">{{ demande.idDem }}</li>
+                        <li id="acte">{{ demande.acte.libelleActe }}</li>
+                        <li id="state">{{ demande.stateDem }}</li>
+                        <li id="dateEnv">{{ demande.dateEnvDem|date:"d-m-Y" }}</li>
+                        <li id="suivi">{{ demande.user.lastname }}</li>
+                    </ul>
+                </a>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

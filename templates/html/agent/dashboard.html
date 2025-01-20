@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECI - Ministere | Dashboard</title>
+    <link rel="stylesheet" href="{% static "css/dashboard.css" %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1>ECI</h1>
+        <div class="links">
+            <ul>
+                <li><a class="active" href="{% url "dashboard" %}">Dashboard</a></li>
+                <li><a href="{% url "analyse_list" %}">Analyse</a></li>
+                <li><a href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a href="">Paramètre</a></li>
+            </ul>
+            <ul>
+                <li><a href="">{{user.username}}</a></li>
+                <li><a href="{% url "logout" %}" class="logout">Se déconnecter</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Content dashboard -->
+    <div class="content">
+        <h1>Tableau de bord</h1>
+        <div class="informations">
+            <div class="infos">
+                <h3>Total des demandes</h3>
+                <h1>{{total_demande}}</h1>
+            </div>
+            <div class="infos">
+                <h3>Total rejeté</h3>
+                <h1>{{rejected_demande}}</h1>
+            </div>
+            <div class="infos">
+                <h3>Total confirmé</h3>
+                <h1>{{completed_demande}}</h1>
+            </div>
+        </div>
+        <div class="acte-infos">
+            <h3>L'acte le plus demandé</h3>
+            <p><span>{{ most_requested_acte }}</span> est actuellement l'acte le plus demandé</p>
+        </div>
+    </div>
+</body>
+</html>

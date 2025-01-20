@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+
 from people.models import People
+
 
 def register_people(request):
     """Handle the registration of a new People user."""
@@ -56,7 +58,14 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "Connexion réussie !")
-                return redirect('home')  # Redirect to home or dashboard after login
+
+                # Check if the user has a related people object
+                if hasattr(user, 'people'):
+                    return redirect('home')  # Redirect to home or dashboard after login
+                elif user.agents:
+                    return redirect('dashboard')
+                else:
+                    return redirect('admin')
             else:
                 messages.error(request, "Identifiants invalides. Veuillez réessayer.")
         except User.DoesNotExist:
