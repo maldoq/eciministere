@@ -18,11 +18,19 @@
                 <li><a href="{% url "dashboard" %}">Dashboard</a></li>
                 <li><a class="active" href="{% url "analyse_list" %}">Analyse</a></li>
                 <li><a href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a href="{% url "historic_list" %}">Historique</a></li>
                 <li><a href="">Paramètre</a></li>
                 {% elif action == 'confirm' %}
                 <li><a href="{% url "dashboard" %}">Dashboard</a></li>
                 <li><a href="{% url "analyse_list" %}">Analyse</a></li>
                 <li><a class="active" href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a href="{% url "historic_list" %}">Historique</a></li>
+                <li><a href="">Paramètre</a></li>
+                {% elif action == 'historic' %}
+                <li><a href="{% url "dashboard" %}">Dashboard</a></li>
+                <li><a href="{% url "analyse_list" %}">Analyse</a></li>
+                <li><a href="{% url "confirmation_list" %}">Confirmation</a></li>
+                <li><a class="active" href="{% url "historic_list" %}">Historique</a></li>
                 <li><a href="">Paramètre</a></li>
                 {% endif %}
             </ul>
@@ -35,7 +43,7 @@
 
     <!-- Table -->
     <div class="demandelist">
-        <h1>{% if action == 'analyse' %}Analyse{% elif action == 'confirm' %}Confirmation{% endif %}</h1>
+        <h1>{% if action == 'analyse' %}Analyse{% elif action == 'confirm' %}Confirmation{% elif action == 'historic' %}Historique{% endif %}</h1>
         <div class="table">
             <div class="thead">
                 <ul>
@@ -62,6 +70,18 @@
                 {% elif action == 'confirm' %}
                 {% for demande in demande_list %}
                 <a href="{% url "confirmation_detail" demande.idDem %}" class="row">
+                    <ul>
+                        <li id="id">{{ demande.idDem }}</li>
+                        <li id="acte">{{ demande.acte.libelleActe }}</li>
+                        <li id="state">{{ demande.stateDem }}</li>
+                        <li id="dateEnv">{{ demande.dateEnvDem|date:"d-m-Y" }}</li>
+                        <li id="suivi">{{ demande.user.lastname }}</li>
+                    </ul>
+                </a>
+                {% endfor %}
+                {% elif action == 'historic' %}
+                {% for demande in demande_list %}
+                <a href="{% url "historic_detail" demande.idDem %}" class="row">
                     <ul>
                         <li id="id">{{ demande.idDem }}</li>
                         <li id="acte">{{ demande.acte.libelleActe }}</li>

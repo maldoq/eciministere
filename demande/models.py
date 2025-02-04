@@ -1,10 +1,9 @@
 from django.db import models
-from people import models as people_models
-from agent import models as agent_models
 from django.db.models import Max
-
 from django.utils import timezone
 
+from agent import models as agent_models
+from people import models as people_models
 
 # Define choices for stateDem
 STATE_CHOICES = [
@@ -32,12 +31,16 @@ class Acte(models.Model):
 
 class DemandeActe(models.Model):
     idDem = models.CharField(max_length=40, primary_key=True)
-    numRegisDem = models.CharField(max_length=40)  # Corrected CharField
-    numActeDem = models.CharField(max_length=40)  # Corrected CharField
-    numberCopieDem = models.SmallIntegerField(default=0)
+    numRegisDem = models.CharField(max_length=40, null=True)  # Corrected CharField
+    numActeDem = models.CharField(max_length=40, null=True)  # Corrected CharField
+    numberCopieDem = models.SmallIntegerField(null=True)
+    nomConcerneDem = models.CharField(max_length=100,null=True)
+    dateNaissDem = models.DateField(null=True)
     dateEnvDem = models.DateTimeField()
     stateDem = models.CharField(max_length=30, choices=STATE_CHOICES)  # Added choices
     suiviDem = models.CharField(max_length=30, choices=SUIVI_CHOICES)  # Added choices
+    message_sent = models.BooleanField(default=False)
+    messageDem = models.TextField(null=True)
     dateAjout = models.DateTimeField(auto_now_add=True)
     dateModif = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=True)

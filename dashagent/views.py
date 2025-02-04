@@ -32,7 +32,7 @@ def analyse_list(request):
     """Render the analysis list page."""
     if request.user.is_authenticated:
         if request.user.agents:
-            demande_list = DemandeActe.objects.filter(Q(status=True) & Q(stateDem='waiting') | Q(stateDem='rejected'))
+            demande_list = DemandeActe.objects.filter(Q(status=True) & Q(stateDem='waiting'))
             return render(request, 'html/agent/treatmentlist.html', {'demande_list': demande_list, 'user': request.user, 'action':'analyse'})
 
 def analyse_detail(request, idDem):
@@ -83,6 +83,22 @@ def confirmation_detail(request, idDem):
             actes = Acte.objects.all()
 
             return render(request, 'html/agent/treatmentdetail.html', {'demande': demande, 'user': request.user, 'action':'confirm', 'actes':actes})
+
+def historic_list(request):
+    """Render the historic list page."""
+    if request.user.is_authenticated:
+        if request.user.agents:
+            demande_list =DemandeActe.objects.filter(Q(status=True) & Q(stateDem='completed') | Q(stateDem='rejected'))
+            return render(request, 'html/agent/treatmentlist.html', {'demande_list': demande_list, 'user': request.user, 'action':'historic'})
+
+def historic_detail(request, idDem):
+    """Render the historic detail page."""
+    if request.user.is_authenticated:
+        if request.user.agents:
+            demande = DemandeActe.objects.get(idDem=idDem)
+            actes = Acte.objects.all()
+
+            return render(request, 'html/agent/treatmentdetail.html', {'demande': demande, 'user': request.user, 'action':'historic', 'actes':actes})
 
 def confirmation_validation(request, idDem):
     """Render the confirmation validation page."""

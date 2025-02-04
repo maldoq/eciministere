@@ -198,6 +198,17 @@ nav > a.connected:focus{
     outline: none;
     transition: all 0.1s ease;
 }
+.container .info-demande form .info select.error-input,
+.container .info-demande form .info input.error-input{
+    border: 1px solid red; /* Change this to your desired error color */
+    animation: bounce 0.5s;
+}
+.container .info-demande form .info select.error-input:hover,
+.container .info-demande form .info input.error-input:hover,
+.container .info-demande form .info select.error-input:focus,
+.container .info-demande form .info input.error-input:focus{
+    border: 1px solid red; /* Change this to your desired error color */
+}
 .container .info-demande form .info select:hover,
 .container .info-demande form .info select:focus,
 .container .info-demande form .info input:hover,

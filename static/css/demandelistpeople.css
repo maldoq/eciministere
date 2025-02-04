@@ -5,6 +5,11 @@
     --primary-light-blue-color: #0083dd;
     --primary-black-color: #000000;
     --paragraph-text-color: #7D7D7D;
+    --bg-gray-color: #E0E0E0;
+    --bg-yellow-color: #F7DC6F;
+    --bg-red-color: #F5B7B1;
+    --bg-green-color: #82E0AA;
+    --bg-blue-color: #aed6f1;
     --footer-color: #00192A;
     --gray-text-color: #F7F7F7;
     --dark-blur-effect-color: #D7DBDB;
@@ -219,6 +224,26 @@ nav > a.connected:focus{
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
     color: var(--paragraph-text-color);
+}
+.demandelist .table .tbody .row ul li span{
+    display: inline-flex;
+    padding: 5px 20px;
+    border-radius: 20px;
+}
+.demandelist .table .tbody .row ul li.gray span{
+    background-color: var(--bg-gray-color);
+}
+.demandelist .table .tbody .row ul li.yellow span{
+    background-color: var(--bg-yellow-color);
+}
+.demandelist .table .tbody .row ul li.red span{
+    background-color: var(--bg-red-color);
+}
+.demandelist .table .tbody .row ul li.green span{
+    background-color: var(--bg-green-color);
+}
+.demandelist .table .tbody .row ul li.blue span{
+    background-color: var(--bg-blue-color);
 }
 .demandelist .table .tbody .row .actions{
     display: flex;

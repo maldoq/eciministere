@@ -109,6 +109,13 @@ body{
     outline: none;
     transition: all 0.1s ease-in-out;
 }
+.form form input.error-input {
+    border: 1px solid red; /* Change this to your desired error color */
+    animation: bounce 0.5s;
+}
+.form form input.error-input:hover {
+    border: 1px solid red; /* Change this to your desired error color */
+}
 .form form input:hover,
 .form form input:focus{
     border: 1px solid var(--primary-light-blue-color);
@@ -163,4 +170,16 @@ body{
 }
 .form .return a:hover{
     color: var(--primary-dark-blue-color);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(-10px);
+    }
+    60% {
+        transform: translateX(-5px);
+    }
 }

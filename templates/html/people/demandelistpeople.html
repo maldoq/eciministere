@@ -24,6 +24,7 @@
         </ul>
         {% if user.is_authenticated %}
             <a href="" class="connected">{{ user.email }}</a>
+            <a href="{% url "logout" %}" class="connected">Se deconnecter</a>
         {% else %}
             <a href="{% url 'login' %}" class="login">Se connecter</a>
         {% endif %}
@@ -49,9 +50,28 @@
                     <ul>
                         <li id="id">{{ demande.idDem }}</li>
                         <li id="acte">{{ demande.acte.libelleActe }}</li>
-                        <li id="state">{{ demande.stateDem }}</li>
+                        {% if demande.stateDem == 'draft' %}
+                        <li id="state" class='gray'><span>{{ demande.stateDem }}</span></li>
+                        {% elif demande.stateDem == 'waiting' %}
+                        <li id="state" class='yellow'><span>{{ demande.stateDem }}</span></li>
+                        {% elif demande.stateDem == 'running' %}
+                        <li id="state" class='blue'><span>{{ demande.stateDem }}</span></li>
+                        {% elif demande.stateDem == 'completed' %}
+                        <li id="state" class='green'><span>{{ demande.stateDem }}</span></li>
+                        {% elif demande.stateDem == 'rejected' %}
+                        <li id="state" class='red'><span>{{ demande.stateDem }}</span></li>
+                        {% endif %}
                         <li id="dateEnv">{{ demande.dateEnvDem|date:"d-m-Y" }}</li>
-                        <li id="suivi">{{ demande.suiviDem }}</li>
+                        {% if demande.suiviDem == 'none' %}
+                        <li id="suivi" class='gray'><span>{{ demande.suiviDem }}</span></li>
+                        {% elif demande.suiviDem == 'in progress' %}
+                        <li id="suivi" class='blue'><span>{{ demande.suiviDem }}</span></li>
+                        {% elif demande.suiviDem == 'ready' %}
+                        <li id="suivi" class='green'><span>{{ demande.suiviDem }}</span></li>
+                        {% elif demande.suiviDem == 'stopped' %}
+                        <li id="suivi" class='red'><span>{{ demande.suiviDem }}</span></li>
+                        {% endif %}
+                        <li id="suivi"><span>{{ demande.suiviDem }}</span></li>
                     </ul>
                     <div class="actions">
                         <a href="{% url 'show_demand' demande.idDem %}">
@@ -72,7 +92,7 @@
                                 <rect width="24" height="24" fill="white" transform="translate(0 0.5)"/>
                                 </clipPath>
                                 </defs>
-                            </svg>    
+                            </svg>
                         </a>
                         {% comment %} {% url 'delete_demand' demande.idDem %} {% endcomment %}
                         <a href="">

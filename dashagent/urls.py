@@ -11,4 +11,6 @@ urlpatterns = [
     path('confirmation_list/', views.confirmation_list, name='confirmation_list'),
     path('confirmation_detail/<str:idDem>/', views.confirmation_detail, name='confirmation_detail'),
     path('confirmation_validation/<str:idDem>/', views.confirmation_validation, name='confirmation_validation'),
+    path('historic_list/', views.historic_list, name='historic_list'),
+    path('historic_list/<str:idDem>/', views.historic_detail, name='historic_detail'),
 ]
