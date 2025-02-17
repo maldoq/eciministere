@@ -36,25 +36,19 @@
             <div class="nav-link-middle">
                 <a href="{% url "profile_view" %}" class="link-setting">Informations personnelles</a>
                 <a href="{% url "notification" %}" class="link-setting active">Notifications <div class="counter">
-                    <p>2</p>
+                    <p>{{count_notify}}</p>
                 </div></a>
                 <a href="{% url "logout" %}" class="link-setting red">Se déconnecter</a>
             </div>
         </div>
         <!-- Information de l'utilisateur -->
         <div class="right-container">
+            {% for notify in notifications %}
             <a href="" class="notification">
-                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
-                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
+                <h2>{{notify.title}}</h2>
+                <p>{{notify.message}}</p>
             </a>
-            <a href="" class="notification">
-                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
-                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
-            </a>
-            <a href="" class="notification">
-                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
-                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
-            </a>
+            {% endfor %}
         </div>
     </div>
 

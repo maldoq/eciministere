@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from agent.models import Service
 from demande.models import Acte, DemandeActe
+from notification.models import Notification
 from people.models import People
 
 
@@ -61,20 +62,27 @@ def add_demand(request):
             fullName = request.POST.get('fullName')
             birthday = request.POST.get('birthday')
 
+            acte = Acte.objects.get(id=acte_id)
+            service = Service.objects.get(id=1)
+
             if not numCopie or not numRegis or not numActe:
                 statedem = 'draft'
                 suividem = 'none'
-                numCopie = 0
+                if not numCopie:
+                    numCopie = 0
             else:
                 statedem = 'waiting'
                 suividem = 'in progress'
 
+                Notification.objects.create(
+                    user=request.user,
+                    title=f'Demande d\'{acte.libelleActe} envoyée',
+                    message=f'Votre demande d\'{acte.libelleActe} pour {fullName} a été envoyée avec succès. Veuillez suivre vos notifications pour être à jour',
+                )
+
             if numCopie and int(numCopie) <= 0:
                 error_fields.append('numCopie')
                 return render(request, 'html/people/demandedetailpeople.html',{'user': request.user,'action':action,'actes':actes,'error_fields':error_fields})
-
-            acte = Acte.objects.get(id=acte_id)
-            service = Service.objects.get(id=1)
 
             DemandeActe.objects.create(
                 people=request.user.people,
@@ -106,6 +114,8 @@ def edit_demand(request, idDem):
         numActe = request.POST.get('numActe')
         numRegis = request.POST.get('numRegis')
         numCopie = request.POST.get('copie')
+        fullname = request.POST.get('fullname')
+        birthday = request.POST.get('birthday')
 
         acte = Acte.objects.get(id=acte_id)
 
@@ -114,11 +124,19 @@ def edit_demand(request, idDem):
                 demande.stateDem = 'waiting'
                 demande.suiviDem = 'in progress'
 
+                Notification.objects.create(
+                    user=request.user,
+                    title=f'Demande d\'{acte.libelleActe} envoyée',
+                    message=f'Votre demande d\'{acte.libelleActe} pour {fullname} a été envoyée avec succès. Veuillez suivre vos notifications pour être à jour',
+                )
+
         # Update the existing demand
         demande.acte = acte
         demande.numActeDem = numActe
         demande.numRegisDem = numRegis
         demande.numberCopieDem = numCopie
+        demande.nomConcerneDem = fullname
+        demande.dateNaissDem = birthday
         demande.save()  # Save the updated demand
 
         messages.success(request, "Demande modifiée avec succès.")
@@ -150,9 +168,11 @@ def profile_user(request):
     """Display the profile"""
 
     person = People.objects.get(user=request.user)
+    notifications = Notification.objects.filter(user=request.user)
 
     return render(request, 'html/people/profilpeople.html', {
-        'person': person
+        'person': person,
+        'count_notify': notifications.count(),
     })
 
 @login_required
@@ -184,6 +204,10 @@ def edit_profile(request):
 def notif_user(request):
     """Display the notifications of the user"""
 
+    notifications = Notification.objects.filter(user=request.user)
+
     return render(request, 'html/people/notifpeople.html', {
-        'user': request.user
+        'user': request.user,
+        'notifications':notifications,
+        'count_notify':notifications.count(),
     })

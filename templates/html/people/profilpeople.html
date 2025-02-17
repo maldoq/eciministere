@@ -36,7 +36,7 @@
             <div class="nav-link-middle">
                 <a href="{% url "profile_view" %}" class="link-setting active">Informations personnelles</a>
                 <a href="{% url "notification" %}" class="link-setting">Notifications <div class="counter">
-                    <p>2</p>
+                    <p>{{count_notify}}</p>
                 </div></a>
                 <a href="{% url "logout" %}" class="link-setting red">Se déconnecter</a>
             </div>

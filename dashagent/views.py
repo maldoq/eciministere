@@ -2,6 +2,7 @@ from django.db.models import Count, Q
 from django.shortcuts import redirect, render
 
 from demande.models import Acte, DemandeActe
+from notification.models import Notification
 
 
 # Create your views here.
@@ -54,6 +55,12 @@ def analyse_validation(request, idDem):
             demande.suiviDem = 'in progress'
             demande.save()
 
+            Notification.objects.create(
+                    user=demande.people.user,
+                    title=f'Demande d\'{demande.acte.libelleActe} Validée et en cours de traitement',
+                    message=f'Votre demande d\'{demande.acte.libelleActe} pour {demande.nomConcerneDem} a été validé avec succès et est en cours de traitement. Veuillez suivre vos notifications pour être à jour',
+                )
+
             return redirect('analyse_list')
 
 def analyse_rejection(request, idDem):
@@ -65,6 +72,12 @@ def analyse_rejection(request, idDem):
             demande.stateDem = 'rejected'
             demande.suiviDem = 'stopped'
             demande.save()
+
+            Notification.objects.create(
+                    user=demande.people.user,
+                    title=f'Demande d\'{demande.acte.libelleActe} rejetée',
+                    message=f'Votre demande d\'{demande.acte.libelleActe} pour {demande.nomConcerneDem} a été rejeté faute d\'informations incorrectes. Veuillez reprendre le processus avec les informations adequates',
+                )
 
             return redirect('analyse_list')
 
@@ -109,5 +122,11 @@ def confirmation_validation(request, idDem):
             demande.stateDem = 'completed'
             demande.suiviDem = 'ready'
             demande.save()
+
+            Notification.objects.create(
+                    user=demande.people.user,
+                    title=f'Demande d\'{demande.acte.libelleActe} prête à être récupérée',
+                    message=f'Votre demande d\'{demande.acte.libelleActe} pour {demande.nomConcerneDem} a été finalisé. Veuillez vous rendre au bureau pour la/les récupérer.',
+                )
 
             return redirect('confirmation_list')
