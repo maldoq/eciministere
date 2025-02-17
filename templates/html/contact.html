@@ -23,8 +23,7 @@
             {% endif %}
         </ul>
         {% if user.is_authenticated %}
-            <a href="" class="connected">{{ user.email }}</a>
-            <a href="{% url "logout" %}" class="connected">Se deconnecter</a>
+            <a href="{% url "profile_view" %}" class="connected">{{ user.email }}</a>
         {% else %}
             <a href="{% url 'login' %}" class="login">Se connecter</a>
         {% endif %}

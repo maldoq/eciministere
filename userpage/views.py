@@ -2,10 +2,12 @@ from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
 
 from agent.models import Service
 from demande.models import Acte, DemandeActe
+from people.models import People
 
 
 # Create your views here.
@@ -141,4 +143,47 @@ def show_demand(request, idDem):
         'action': action,
         'actes': actes,
         'demande': demande  # Pass the existing demand to the template
+    })
+
+@login_required
+def profile_user(request):
+    """Display the profile"""
+
+    person = People.objects.get(user=request.user)
+
+    return render(request, 'html/people/profilpeople.html', {
+        'person': person
+    })
+
+@login_required
+def edit_profile(request):
+    """Edit the user profile"""
+    person = People.objects.get(user=request.user)
+    user = User.objects.get(id=request.user.id)
+
+    if request.method == 'POST':
+        nom = request.POST.get('nom')
+        prenom = request.POST.get('prenom')
+        email = request.POST.get('email')
+        tel = request.POST.get('tel')
+        address = request.POST.get('address')
+
+        user.first_name = prenom
+        user.last_name = nom
+        user.email = email
+        user.save()
+
+        person.addressPeople = address
+        person.telPeople = tel
+        person.save()
+
+        return redirect('profile_view')
+
+
+@login_required
+def notif_user(request):
+    """Display the notifications of the user"""
+
+    return render(request, 'html/people/notifpeople.html', {
+        'user': request.user
     })

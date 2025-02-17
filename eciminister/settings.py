@@ -38,12 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'dashagent',
     'demande',
     'agent',
     'authentication',
     'people',
     'userpage',
+    'notification',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +77,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'eciminister.wsgi.application'
+
+ASGI_APPLICATION = 'eciminister.asgi.application'
+
+# Configure Channels layer with Redis
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],  # Redis server configuration
+        },
+    },
+}
 
 
 # Database
@@ -136,3 +150,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where collectstat
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'eciministermessagerie@gmail.com'
+EMAIL_HOST_PASSWORD = ''

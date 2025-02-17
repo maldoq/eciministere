@@ -1,82 +1,85 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECI - Ministere | Demande</title>
-    <link rel="stylesheet" href="../../assets/css/profilpeople.css">
+    <title>ECI - Ministere | Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profilpeople.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navbar -->
     <nav>
-        <h1><a href="">ECI</a></h1>
+        <h1><a href="{% url 'home' %}">ECI</a></h1>
         <ul>
-            <li><a href="">Acceuil</a></li>
-            <li><a href="">A propos</a></li>
-            <li><a class="active" href="">Mes demandes</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a class="active" href="{% url 'about' %}">A propos</a></li>
+            {% if user.is_authenticated %}
+                <li><a class="active" href="{% url 'demandelist' %}">Mes demandes</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% else %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% endif %}
         </ul>
-        <!-- <a href="" class="login">Se connecter</a> -->
-        <a href="" class="connected">dominiquemalik20@gmail.com</a>
+        {% if user.is_authenticated %}
+            <a href="{% url "profile_view" %}" class="connected active">{{ person.user.email }}</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="login">Se connecter</a>
+        {% endif %}
     </nav>
 
     <!-- Container -->
      <div class="container">
-        <!-- Information de la demande -->
-        <div class="info-demande">
-            <div class="acte">
-                <h1>Faire une demande d'acte</h1>
-                <div class="current-acte">
-                    <div>
-                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M53.4379 12.7232C54.0629 13.3482 54.5986 14.1964 55.0451 15.2679C55.4915 16.3393 55.7147 17.3214 55.7147 18.2143V56.7857C55.7147 57.6786 55.4022 58.4375 54.7772 59.0625C54.1522 59.6875 53.3933 60 52.5004 60H7.50042C6.60756 60 5.84863 59.6875 5.22363 59.0625C4.59863 58.4375 4.28613 57.6786 4.28613 56.7857V3.21429C4.28613 2.32143 4.59863 1.5625 5.22363 0.9375C5.84863 0.3125 6.60756 0 7.50042 0H37.5004C38.3933 0 39.3754 0.223214 40.4468 0.669643C41.5183 1.11607 42.3665 1.65179 42.9915 2.27679L53.4379 12.7232ZM38.5718 4.55357V17.1429H51.1611C50.9379 16.4955 50.6924 16.0379 50.4245 15.7701L39.9446 5.29018C39.6768 5.02232 39.2192 4.77679 38.5718 4.55357ZM51.429 55.7143V21.4286H37.5004C36.6076 21.4286 35.8486 21.1161 35.2236 20.4911C34.5986 19.8661 34.2861 19.1071 34.2861 18.2143V4.28571H8.57185V55.7143H51.429ZM17.1433 26.7857C17.1433 26.4732 17.2437 26.2165 17.4446 26.0156C17.6455 25.8147 17.9022 25.7143 18.2147 25.7143H41.7861C42.0986 25.7143 42.3553 25.8147 42.5562 26.0156C42.7571 26.2165 42.8576 26.4732 42.8576 26.7857V28.9286C42.8576 29.2411 42.7571 29.4978 42.5562 29.6987C42.3553 29.8996 42.0986 30 41.7861 30H18.2147C17.9022 30 17.6455 29.8996 17.4446 29.6987C17.2437 29.4978 17.1433 29.2411 17.1433 28.9286V26.7857ZM41.7861 34.2857C42.0986 34.2857 42.3553 34.3862 42.5562 34.5871C42.7571 34.7879 42.8576 35.0446 42.8576 35.3571V37.5C42.8576 37.8125 42.7571 38.0692 42.5562 38.2701C42.3553 38.471 42.0986 38.5714 41.7861 38.5714H18.2147C17.9022 38.5714 17.6455 38.471 17.4446 38.2701C17.2437 38.0692 17.1433 37.8125 17.1433 37.5V35.3571C17.1433 35.0446 17.2437 34.7879 17.4446 34.5871C17.6455 34.3862 17.9022 34.2857 18.2147 34.2857H41.7861ZM41.7861 42.8571C42.0986 42.8571 42.3553 42.9576 42.5562 43.1585C42.7571 43.3594 42.8576 43.6161 42.8576 43.9286V46.0714C42.8576 46.3839 42.7571 46.6406 42.5562 46.8415C42.3553 47.0424 42.0986 47.1429 41.7861 47.1429H18.2147C17.9022 47.1429 17.6455 47.0424 17.4446 46.8415C17.2437 46.6406 17.1433 46.3839 17.1433 46.0714V43.9286C17.1433 43.6161 17.2437 43.3594 17.4446 43.1585C17.6455 42.9576 17.9022 42.8571 18.2147 42.8571H41.7861Z" fill="#7D7D7D"/>
-                        </svg>
-                        <h2>Pas d'acte demandé</h2>
-                    </div>
-                    <p>veuillez sélectionner un acte</p>
+        <!-- Navigation à gauche -->
+        <div class="left-nav">
+            <div class="nav-link-middle">
+                <a href="{% url "profile_view" %}" class="link-setting active">Informations personnelles</a>
+                <a href="{% url "notification" %}" class="link-setting">Notifications <div class="counter">
+                    <p>2</p>
+                </div></a>
+                <a href="{% url "logout" %}" class="link-setting red">Se déconnecter</a>
+            </div>
+        </div>
+        <!-- Information de l'utilisateur -->
+        <div class="right-container">
+            <div class="descript-user">
+                <div class="profil-image"></div>
+                <div class="description">
+                    <h2>{{person.user.first_name}} {{person.user.last_name}}</h2>
+                    <p>{{person.user.email}}</p>
                 </div>
             </div>
-            <form action="" method="post">
-                <div class="info">
-                    <h2>Quelle est la copie d’acte que vous aimeriez effectuer ?</h2>
-                    <select name="" id="">
-                        <option value="">-- Choisir un acte --</option>
-                        <option value="">Acte de naissance</option>
-                        <option value="">Acte de mariage</option>
-                        <option value="">Acte de décès</option>
-                    </select>
-                </div>
-                <div class="info">
-                    <h2>Entrez les informations nécessaires:</h2>
+            <div class="info-user">
+                <h2>Information personnelle</h2>
+                <form action="{% url "edit_profile" %}" method="post">
+                    {% csrf_token %}
                     <div class="inputs">
-                        <input type="text" name="numRegis" id="numRegis" placeholder="Numéro de registre">
-                        <input type="text" name="numActe" id="numActe" placeholder="Numéro d'acte">
-                        <input type="number" name="copie" id="copie" placeholder="Nombre de copie">
+                        <div class="input">
+                            <label for="nom">Nom</label>
+                            <input type="text" name="nom" id="nom" placeholder="nom" value="{{person.user.last_name}}">
+                        </div>
+                        <div class="input">
+                            <label for="prenom">Prénoms</label>
+                            <input type="text" name="prenom" id="prenom" placeholder="prénoms" value="{{person.user.first_name}}">
+                        </div>
                     </div>
-                </div>
-                <div class="buttons">
-                    <button type="submit" name="submit" class="btn">Soumettre</button>
-                    <a href="">Annuler</a>
-                </div>
-            </form>
-        </div>
-        <!-- Suivi de la demande -->
-        <div class="suivi-demande">
-            <h2>Suivi de la demande</h2>
-            <div class="line-suivi">
-                <div class="line">
-                    <input type="radio" name="" id="">
-                    <div class="sized"></div>
-                    <input type="radio" name="" id="">
-                    <div class="sized"></div>
-                    <input type="radio" name="" id="">
-                </div>
-                <div class="info">
-                    <p>Envoie</p>
-                    <p>Vérification et validation</p>
-                    <p>Prêt</p>
-                </div>
+                    <div class="inputs">
+                        <div class="input">
+                            <label for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="email" value="{{person.user.email}}">
+                        </div>
+                        <div class="input">
+                            <label for="tel">Numéro de téléphone</label>
+                            <input type="text" name="tel" id="tel" placeholder="ex: 0704043029" value="{{person.indicatorPeople}}{{person.numberPeople}}">
+                        </div>
+                    </div>
+                    <div class="input">
+                        <label for="adresse">Adresse géographique - lieu de naissance</label>
+                        <input type="text" name="adresse" id="adresse" placeholder="Adresse géographique" value="{{person.addressPeople}}">
+                    </div>
+                    <button type="submit">Modifier</button>
+                </form>
             </div>
         </div>
      </div>
@@ -85,9 +88,9 @@
     <footer>
         <h1>ECI</h1>
         <ul>
-            <li><a href="">Acceuil</a></li>
-            <li><a href="">A propos</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a href="{% url 'about' %}">A propos</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
         </ul>
         <div class="sized"></div>
         <p>2025 Copyright - alright reserved</p>

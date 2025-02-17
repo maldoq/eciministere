@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECI - Ministere | Notifications</title>
+    <link rel="stylesheet" href="{% static 'css/notifpeople.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h1><a href="{% url 'home' %}">ECI</a></h1>
+        <ul>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a class="active" href="{% url 'about' %}">A propos</a></li>
+            {% if user.is_authenticated %}
+                <li><a class="active" href="{% url 'demandelist' %}">Mes demandes</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% else %}
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+            <a href="{% url "profile_view" %}" class="connected active">{{ user.email }}</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="login">Se connecter</a>
+        {% endif %}
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Navigation à gauche -->
+        <div class="left-nav">
+            <div class="nav-link-middle">
+                <a href="{% url "profile_view" %}" class="link-setting">Informations personnelles</a>
+                <a href="{% url "notification" %}" class="link-setting active">Notifications <div class="counter">
+                    <p>2</p>
+                </div></a>
+                <a href="{% url "logout" %}" class="link-setting red">Se déconnecter</a>
+            </div>
+        </div>
+        <!-- Information de l'utilisateur -->
+        <div class="right-container">
+            <a href="" class="notification">
+                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
+                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
+            </a>
+            <a href="" class="notification">
+                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
+                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
+            </a>
+            <a href="" class="notification">
+                <h2>Copie de l’acte de Papoue prête à être récupéré</h2>
+                <p>Veuillez récupérer votre demande au service accueil de la mairie. Vous paierez un montant de 5000fcfa à la caisse pour le timbre</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <h1>ECI</h1>
+        <ul>
+            <li><a href="{% url 'home' %}">Acceuil</a></li>
+            <li><a href="{% url 'about' %}">A propos</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+        <div class="sized"></div>
+        <p>2025 Copyright - alright reserved</p>
+    </footer>
+</body>
+</html>
